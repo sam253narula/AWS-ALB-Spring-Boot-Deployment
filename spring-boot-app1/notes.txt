@@ -1,0 +1,44 @@
+EC2 CookBook
+
+Login AWS -> create EC2 ubuntu instance, create new key paid, download pem file
+Create S3 bucket, upload jar file
+Windwos:- Install puttyGen and putty
+use puttygen, create ppk file out of pem file
+then open putty, open aws ec2 instance -> connect
+copy the hostname after @ and username before @
+
+
+Then Ununtu commands
+$  sudo apt update
+$  sudo apt-get install openjdk-8-jdk
+then Y
+
+if things go wrong then
+sudo apt-get remove openjdk*
+
+
+Now Deploymennt from S3 to EC2 instance
+
+
+Open S3,
+
+Open your bucket -> goto Permissions Tab -> block all public access -> OFF
+Then open your jar file in your bucket -> permission tab -> Make Public acess everyone as Read and save
+then 
+$ wget s3ObjectURL
+
+
+now run this jar
+java -jar <springBoot.jar>
+
+If this application doesnt run, then check Inbound group. if u only see port 22 ssh, then u need to add port 8080 or any port u have by click on below security group. then 
+
+Security groups  (or whoch ever security group u see on your EC2 instance.
+launch-wizard-3.
+now below, see tabs, click on Inbound rules -> Edit Inbound rules -> add rule -> add your port(like 8080 or any spring boot port) and everywhere   -> save
+To see the runnning java instances on Ubuntu
+
+$ ps -fC java
+
+ To Kill java Instance 
+ kill -9 <pid>
